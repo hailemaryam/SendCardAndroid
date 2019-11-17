@@ -2,4 +2,7 @@
     <string name="app_name">SendCard</string>
     <string name="tab_text_1">Phone Numbers</string>
     <string name="tab_text_2">Sent List</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_send_for_all">send for all</string>
+    <string name="action_clear_sent_list">clear sent list</string>
 </resources>
