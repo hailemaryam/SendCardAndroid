@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                promptUser(R.layout.prompt_new_number, "add", "cancel");
             }
         });
     }
@@ -52,41 +53,44 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_send_for_all:
+                promptUser(R.layout.prompt_amount, "ok", "cancel");
+                return true;
+            case R.id.action_settings:
+                promptUser(R.layout.prompt_confimation, "yes", "no");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void promptUser(int resource, String posetiveText, String negativeText) {
         // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(this);
-        View promptsView = li.inflate(R.layout.prompt_amount, null);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-
+        View promptsView = li.inflate(resource, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
-
-        final EditText userInput = (EditText) promptsView
-                .findViewById(R.id.editTextDialogUserInput);
-
         // set dialog message
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("OK",
+                .setPositiveButton(posetiveText,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 // get user input and set it to result
                                 // edit text
                             }
                         })
-                .setNegativeButton("Cancel",
+                .setNegativeButton(negativeText,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 dialog.cancel();
                             }
                         });
-
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
         // show it
         alertDialog.show();
-        return super.onOptionsItemSelected(item);
     }
 }
