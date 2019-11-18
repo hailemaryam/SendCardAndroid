@@ -19,7 +19,6 @@ public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private PageViewModel pageViewModel;
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -32,26 +31,26 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
-        int index = 1;
-        if (getArguments() != null) {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
-        }
-        pageViewModel.setIndex(index);
     }
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
-        final TextView textView = root.findViewById(R.id.section_label);
-        pageViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root;
+        if (getArguments() != null && getArguments().getInt(ARG_SECTION_NUMBER) == 1 ) {
+            root = inflater.inflate(R.layout.fragment_phone_list, container, false);
+            final TextView textView = root.findViewById(R.id.section_label);
+            textView.setText("phone list");
+        } else if (getArguments() != null && getArguments().getInt(ARG_SECTION_NUMBER) == 2){
+            root = inflater.inflate(R.layout.fragment_sent_list, container, false);
+            final TextView textView = root.findViewById(R.id.section_label);
+            textView.setText("sent list");
+        } else {
+            root = inflater.inflate(R.layout.fragment_phone_list, container, false);
+            final TextView textView = root.findViewById(R.id.section_label);
+            textView.setText("phone list");
+        }
         return root;
     }
 }
