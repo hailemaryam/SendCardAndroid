@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SendCard</string>
+    <string name="app_name">Send Card</string>
     <string name="tab_text_1">Phone Numbers</string>
     <string name="tab_text_2">Sent List</string>
     <string name="action_settings">Settings</string>
