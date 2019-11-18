@@ -13,7 +13,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/phoneTextView"
+        android:id="@+id/sentPhoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,17 +48,17 @@
         android:id="@+id/requestUssd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/phoneTextView"
+        app:layout_constraintTop_toBottomOf="@id/sentPhoneTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="@string/request_ussd"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/registrationNumTextView"
+        android:id="@+id/requestTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="100145"
-        app:layout_constraintTop_toBottomOf="@id/phoneTextView"
+        app:layout_constraintTop_toBottomOf="@id/sentPhoneTextView"
         app:layout_constraintLeft_toRightOf="@id/requestUssd"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"/>
@@ -73,7 +73,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/responseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/requestUssd"
