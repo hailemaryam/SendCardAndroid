@@ -5,4 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_send_for_all">send for all</string>
     <string name="action_clear_sent_list">clear sent list</string>
+    <string name="cross_image_content_description">Delete student from SQLite database</string>
+    <string name="edit_button_description">Edit Single student information</string>
+    <string name="request_ussd">Request USSD</string>
+    <string name="response_ussd">Response USSD</string>
+
 </resources>
