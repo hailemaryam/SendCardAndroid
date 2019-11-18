@@ -9,5 +9,6 @@
     <string name="edit_button_description">Edit Single student information</string>
     <string name="request_ussd">Request USSD</string>
     <string name="response_ussd">Response USSD</string>
+    <string name="empty_list_message">There is no content to show.</string>
 
 </resources>
