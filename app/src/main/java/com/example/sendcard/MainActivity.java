@@ -3,7 +3,6 @@ package com.example.sendcard;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.example.sendcard.ui.main.SectionsPagerAdapter;
+import com.example.sendcard.adapters.SectionsPagerAdapter;
 import android.app.AlertDialog;
-import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
