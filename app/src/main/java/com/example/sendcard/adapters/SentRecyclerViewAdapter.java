@@ -44,6 +44,7 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
 
     @Override
     public void onBindViewHolder(@NonNull SentCustomViewHolder holder, int position) {
+        sentViewVisibility();
         final int itemPosition = position;
         Sent sent = sentList.get(itemPosition);
         holder.sentPhoneTextView.setText(sent.getPhone());

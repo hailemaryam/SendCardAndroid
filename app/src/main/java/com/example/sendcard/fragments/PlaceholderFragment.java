@@ -73,6 +73,7 @@ public class PlaceholderFragment extends Fragment {
     public void showPhoneList(){
         phoneListRecyclerView =  (RecyclerView) getView().findViewById(R.id.phoneRecyclerView);
         phoneListEmptyTextView = getView().findViewById(R.id.emptyPhoneListTextView);
+        phoneListEmptyTextView.setVisibility(View.VISIBLE);
         phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(getActivity(), phoneListEmptyTextView);
         phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         phoneListRecyclerView.setAdapter(phoneListRecyclerViewAdapter);
@@ -80,6 +81,7 @@ public class PlaceholderFragment extends Fragment {
     public void showSentList(){
         sentListRecyclerView =  (RecyclerView) getView().findViewById(R.id.sentRecyclerView);
         sentListEmptyTextView = getView().findViewById(R.id.emptySentListTextView);
+        sentListEmptyTextView.setVisibility(View.VISIBLE);
         sentListRecyclerViewAdapter = new SentRecyclerViewAdapter(getActivity(), sentListEmptyTextView);
         sentListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         sentListRecyclerView.setAdapter(sentListRecyclerViewAdapter);

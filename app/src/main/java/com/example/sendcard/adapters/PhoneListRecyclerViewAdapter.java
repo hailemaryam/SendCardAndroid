@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sendcard.DTO.Phone;
-import com.example.sendcard.DTO.Sent;
 import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.R;
 import com.example.sendcard.ui.main.PhoneCustomViewHolder;
@@ -25,21 +24,19 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     private List<Phone> phoneList;
     private Context context;
     private TextView phoneListEmptyTextView;
-
     public PhoneListRecyclerViewAdapter(Context context, TextView phoneListEmptyTextView) {
         this.phoneList = phoneBox.getAll();
         this.context = context;
         this.phoneListEmptyTextView = phoneListEmptyTextView;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
-
     @NonNull
     @Override
     public PhoneCustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.phone_item, parent, false);
+        phoneViewVisibility();
         return new PhoneCustomViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(PhoneCustomViewHolder holder, int position) {
         final int itemPosition = position;
@@ -61,12 +58,10 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return phoneList.size();
     }
-
     public void phoneViewVisibility() {
         if(phoneList.isEmpty())
             phoneListEmptyTextView.setVisibility(View.VISIBLE);
@@ -77,5 +72,6 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
         phoneBox.put(phone);
         phoneList.add(phone);
         notifyDataSetChanged();
+        phoneViewVisibility();
     }
 }
