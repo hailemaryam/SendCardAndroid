@@ -1,6 +1,5 @@
 package com.example.sendcard.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sendcard.DTO.Phone;
 import com.example.sendcard.DTO.Sent;
-import com.example.sendcard.Database.DatabaseQueryClass;
 import com.example.sendcard.R;
 import com.example.sendcard.adapters.PhoneListRecyclerViewAdapter;
 import com.example.sendcard.adapters.SentRecyclerViewAdapter;
@@ -27,7 +25,6 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
-    private DatabaseQueryClass databaseQueryClass= new DatabaseQueryClass(getActivity());
     private List<Phone> phoneList = new ArrayList<>();
     private TextView phoneListEmptyTextView;
     private RecyclerView phoneListRecyclerView;
@@ -91,7 +88,7 @@ public class PlaceholderFragment extends Fragment {
         } else {
             phoneListRecyclerView =  (RecyclerView) getView().findViewById(R.id.phoneRecyclerView);
             phoneListEmptyTextView = getView().findViewById(R.id.emptyPhoneListTextView);
-            phoneList.addAll(databaseQueryClass.getAllPhone());
+//            phoneList.addAll(databaseQueryClass.getAllPhone());
             phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(phoneList,getActivity());
             phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             phoneListRecyclerView.setAdapter(phoneListRecyclerViewAdapter);

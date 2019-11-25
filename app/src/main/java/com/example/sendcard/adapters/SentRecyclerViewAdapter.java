@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sendcard.DTO.Sent;
-import com.example.sendcard.Database.DatabaseQueryClass;
 import com.example.sendcard.R;
 import com.example.sendcard.ui.main.SentCustomViewHolder;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -21,12 +20,10 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
 
     private List<Sent> sentList;
     private Context context;
-    private DatabaseQueryClass databaseQueryClass;
 
     public SentRecyclerViewAdapter(List<Sent> sentList, Context context) {
         this.sentList = sentList;
         this.context = context;
-        this.databaseQueryClass = new DatabaseQueryClass(context);
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
