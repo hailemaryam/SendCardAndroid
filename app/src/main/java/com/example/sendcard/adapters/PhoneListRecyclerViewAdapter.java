@@ -56,6 +56,8 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
             @Override
             public void onClick(View v) {
                 phoneBox.remove(phone);
+                phoneList.remove(phone);
+                notifyDataSetChanged();
             }
         });
     }
