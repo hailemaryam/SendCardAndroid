@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sendcard.DTO.Phone;
+import com.example.sendcard.DTO.Sent;
+import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.R;
 import com.example.sendcard.ui.main.PhoneCustomViewHolder;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -15,8 +17,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import io.objectbox.Box;
 
 public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCustomViewHolder> {
+    Box<Phone> phoneBox = ObjectBox.get().boxFor(Phone.class);
     private List<Phone> phoneList;
     private Context context;
     public PhoneListRecyclerViewAdapter(List<Phone> phoneList, Context context) {
@@ -40,13 +44,13 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
         holder.sendImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Sent clicked");
+
             }
         });
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("delete clicked");
+                phoneBox.remove(phone);
             }
         });
     }

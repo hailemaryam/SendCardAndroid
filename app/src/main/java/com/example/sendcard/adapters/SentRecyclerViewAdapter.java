@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sendcard.DTO.Sent;
+import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.R;
 import com.example.sendcard.ui.main.SentCustomViewHolder;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -15,8 +16,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import io.objectbox.Box;
 
 public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomViewHolder> {
+    Box<Sent> sentBox = ObjectBox.get().boxFor(Sent.class);
 
     private List<Sent> sentList;
     private Context context;
@@ -44,7 +47,7 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("sent delete on click listener.");
+                sentBox.remove(sent);
             }
         });
     }

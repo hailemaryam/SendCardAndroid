@@ -1,7 +1,11 @@
 package com.example.sendcard.DTO;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+
+@Entity
 public class Phone {
-    private long id;
+    @Id private long id;
     private String phone;
 
     public Phone() {
