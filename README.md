@@ -1,0 +1,2 @@
+# SendCardAndroid
+# ObjectBox
