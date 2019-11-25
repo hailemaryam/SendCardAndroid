@@ -235,6 +235,48 @@ public class DatabaseQueryClass {
         return rowId;
     }
 
+    public List<Sent> getAllSent(){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        Cursor cursor = null;
+        try {
+
+            cursor = sqLiteDatabase.query(Config.TABLE_PHONE, null, null, null, null, null, Config.COLUMN_SENT_PHONE, null);
+
+            /**
+             // If you want to execute raw query then uncomment below 2 lines. And comment out above line.
+
+             String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_ID, Config.COLUMN_STUDENT_NAME, Config.COLUMN_STUDENT_REGISTRATION, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
+             cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+             */
+
+            if(cursor!=null)
+                if(cursor.moveToFirst()){
+                    List<Sent> studentList = new ArrayList<>();
+                    do {
+                        int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_SENT_ID));
+                        String phone = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SENT_PHONE));
+                        String request = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SENT_REQUEST));
+                        String response = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SENT_RESPONSE));
+                        studentList.add(new Sent(id, phone,request, response));
+                    }   while (cursor.moveToNext());
+
+                    return studentList;
+                }
+        } catch (Exception e){
+            Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, "Operation failed", Toast.LENGTH_SHORT).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+            sqLiteDatabase.close();
+        }
+
+        return Collections.emptyList();
+
+    }
+
     public Sent getSentById(long sentId){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
