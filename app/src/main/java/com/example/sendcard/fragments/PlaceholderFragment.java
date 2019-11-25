@@ -81,38 +81,23 @@ public class PlaceholderFragment extends Fragment {
 
     }
 
-    public void phoneViewVisibility() {
-        if(phoneList.isEmpty())
-            phoneListEmptyTextView.setVisibility(View.VISIBLE);
-        else
-            phoneListEmptyTextView.setVisibility(View.GONE);
-    }
-    public void sentViewVisibility() {
-        if(sentList.isEmpty())
-            sentListEmptyTextView.setVisibility(View.VISIBLE);
-        else
-            sentListEmptyTextView.setVisibility(View.GONE);
-    }
-
     public void showPhoneList(){
         phoneListRecyclerView =  (RecyclerView) getView().findViewById(R.id.phoneRecyclerView);
         phoneListEmptyTextView = getView().findViewById(R.id.emptyPhoneListTextView);
         sentList.clear();
         phoneList.addAll(phoneBox.getAll());
-        phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(phoneList,getActivity());
+        phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(phoneList,getActivity(), phoneListEmptyTextView);
         phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         phoneListRecyclerView.setAdapter(phoneListRecyclerViewAdapter);
-        phoneViewVisibility();
     }
     public void showSentList(){
         sentListRecyclerView =  (RecyclerView) getView().findViewById(R.id.sentRecyclerView);
         sentListEmptyTextView = getView().findViewById(R.id.emptySentListTextView);
         sentList.clear();
         sentList.addAll(sentBox.getAll());
-        sentListRecyclerViewAdapter = new SentRecyclerViewAdapter(sentList,getActivity());
+        sentListRecyclerViewAdapter = new SentRecyclerViewAdapter(sentList,getActivity(), sentListEmptyTextView);
         sentListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         sentListRecyclerView.setAdapter(sentListRecyclerViewAdapter);
-        sentViewVisibility();
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.sendcard.DTO.Sent;
 import com.example.sendcard.Database.ObjectBox;
@@ -23,10 +24,13 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
 
     private List<Sent> sentList;
     private Context context;
+    private TextView sentListEmptyTextView;
 
-    public SentRecyclerViewAdapter(List<Sent> sentList, Context context) {
+
+    public SentRecyclerViewAdapter(List<Sent> sentList, Context context, TextView sentListEmptyTextView) {
         this.sentList = sentList;
         this.context = context;
+        this.sentListEmptyTextView = sentListEmptyTextView;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
@@ -34,6 +38,7 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
     @Override
     public SentCustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.sent_item, parent, false);
+        sentViewVisibility();
         return new SentCustomViewHolder(view);
     }
 
@@ -56,4 +61,12 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
     public int getItemCount() {
         return sentList.size();
     }
+
+    public void sentViewVisibility() {
+        if(sentList.isEmpty())
+            sentListEmptyTextView.setVisibility(View.VISIBLE);
+        else
+            sentListEmptyTextView.setVisibility(View.GONE);
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.sendcard.DTO.Phone;
 import com.example.sendcard.DTO.Sent;
@@ -23,9 +24,12 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     Box<Phone> phoneBox = ObjectBox.get().boxFor(Phone.class);
     private List<Phone> phoneList;
     private Context context;
-    public PhoneListRecyclerViewAdapter(List<Phone> phoneList, Context context) {
+    private TextView phoneListEmptyTextView;
+
+    public PhoneListRecyclerViewAdapter(List<Phone> phoneList, Context context, TextView phoneListEmptyTextView) {
         this.phoneList = phoneList;
         this.context = context;
+        this.phoneListEmptyTextView = phoneListEmptyTextView;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
@@ -33,6 +37,7 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     @Override
     public PhoneCustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.phone_item, parent, false);
+        phoneViewVisibility();
         return new PhoneCustomViewHolder(view);
     }
 
@@ -58,5 +63,12 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     @Override
     public int getItemCount() {
         return phoneList.size();
+    }
+
+    public void phoneViewVisibility() {
+        if(phoneList.isEmpty())
+            phoneListEmptyTextView.setVisibility(View.VISIBLE);
+        else
+            phoneListEmptyTextView.setVisibility(View.GONE);
     }
 }
