@@ -26,8 +26,8 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     private Context context;
     private TextView phoneListEmptyTextView;
 
-    public PhoneListRecyclerViewAdapter(List<Phone> phoneList, Context context, TextView phoneListEmptyTextView) {
-        this.phoneList = phoneList;
+    public PhoneListRecyclerViewAdapter(Context context, TextView phoneListEmptyTextView) {
+        this.phoneList = phoneBox.getAll();
         this.context = context;
         this.phoneListEmptyTextView = phoneListEmptyTextView;
         Logger.addLogAdapter(new AndroidLogAdapter());
@@ -37,7 +37,6 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     @Override
     public PhoneCustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.phone_item, parent, false);
-        phoneViewVisibility();
         return new PhoneCustomViewHolder(view);
     }
 
@@ -58,6 +57,7 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
                 phoneBox.remove(phone);
                 phoneList.remove(phone);
                 notifyDataSetChanged();
+                phoneViewVisibility();
             }
         });
     }
@@ -72,5 +72,9 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
             phoneListEmptyTextView.setVisibility(View.VISIBLE);
         else
             phoneListEmptyTextView.setVisibility(View.GONE);
+    }
+    public void addPhoneList(Phone phone){
+        phoneList.add(phone);
+        notifyDataSetChanged();
     }
 }

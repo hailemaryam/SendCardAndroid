@@ -27,8 +27,8 @@ public class SentRecyclerViewAdapter extends RecyclerView.Adapter<SentCustomView
     private TextView sentListEmptyTextView;
 
 
-    public SentRecyclerViewAdapter(List<Sent> sentList, Context context, TextView sentListEmptyTextView) {
-        this.sentList = sentList;
+    public SentRecyclerViewAdapter( Context context, TextView sentListEmptyTextView) {
+        this.sentList = sentBox.getAll();
         this.context = context;
         this.sentListEmptyTextView = sentListEmptyTextView;
         Logger.addLogAdapter(new AndroidLogAdapter());

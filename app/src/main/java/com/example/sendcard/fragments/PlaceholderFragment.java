@@ -11,32 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import io.objectbox.Box;
-
-import com.example.sendcard.DTO.Phone;
-import com.example.sendcard.DTO.Sent;
-import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.R;
 import com.example.sendcard.adapters.PhoneListRecyclerViewAdapter;
 import com.example.sendcard.adapters.SentRecyclerViewAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
-    Box<Phone> phoneBox = ObjectBox.get().boxFor(Phone.class);
-    Box<Sent> sentBox = ObjectBox.get().boxFor(Sent.class);
-    private List<Phone> phoneList = new ArrayList<>();
     private TextView phoneListEmptyTextView;
     private RecyclerView phoneListRecyclerView;
-    private PhoneListRecyclerViewAdapter phoneListRecyclerViewAdapter;
-    private List<Sent> sentList = new ArrayList<>();
+    public static PhoneListRecyclerViewAdapter phoneListRecyclerViewAdapter;
     private TextView sentListEmptyTextView;
     private RecyclerView sentListRecyclerView;
-    private SentRecyclerViewAdapter sentListRecyclerViewAdapter;
+    public static SentRecyclerViewAdapter sentListRecyclerViewAdapter;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
 
@@ -84,18 +73,14 @@ public class PlaceholderFragment extends Fragment {
     public void showPhoneList(){
         phoneListRecyclerView =  (RecyclerView) getView().findViewById(R.id.phoneRecyclerView);
         phoneListEmptyTextView = getView().findViewById(R.id.emptyPhoneListTextView);
-        sentList.clear();
-        phoneList.addAll(phoneBox.getAll());
-        phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(phoneList,getActivity(), phoneListEmptyTextView);
+        phoneListRecyclerViewAdapter = new PhoneListRecyclerViewAdapter(getActivity(), phoneListEmptyTextView);
         phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         phoneListRecyclerView.setAdapter(phoneListRecyclerViewAdapter);
     }
     public void showSentList(){
         sentListRecyclerView =  (RecyclerView) getView().findViewById(R.id.sentRecyclerView);
         sentListEmptyTextView = getView().findViewById(R.id.emptySentListTextView);
-        sentList.clear();
-        sentList.addAll(sentBox.getAll());
-        sentListRecyclerViewAdapter = new SentRecyclerViewAdapter(sentList,getActivity(), sentListEmptyTextView);
+        sentListRecyclerViewAdapter = new SentRecyclerViewAdapter(getActivity(), sentListEmptyTextView);
         sentListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         sentListRecyclerView.setAdapter(sentListRecyclerViewAdapter);
     }

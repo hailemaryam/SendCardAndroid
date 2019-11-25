@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import com.example.sendcard.DTO.Phone;
 import com.example.sendcard.Database.ObjectBox;
+import com.example.sendcard.fragments.PlaceholderFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                 Phone phone = new Phone();
                                 phone.setPhone(userInput.getText().toString());
                                 phoneBox.put(phone);
+                                PlaceholderFragment.phoneListRecyclerViewAdapter.addPhoneList(phone);
                             }
                         })
                 .setNegativeButton("cancel",
