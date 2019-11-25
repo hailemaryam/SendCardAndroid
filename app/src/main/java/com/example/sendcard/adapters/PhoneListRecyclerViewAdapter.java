@@ -74,6 +74,7 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
             phoneListEmptyTextView.setVisibility(View.GONE);
     }
     public void addPhoneList(Phone phone){
+        phoneBox.put(phone);
         phoneList.add(phone);
         notifyDataSetChanged();
     }

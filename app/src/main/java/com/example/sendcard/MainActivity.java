@@ -7,6 +7,7 @@ import com.example.sendcard.DTO.Phone;
 import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.fragments.PlaceholderFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,10 @@ import android.app.AlertDialog;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    Box<Phone> phoneBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ObjectBox.init(this);
-        phoneBox = ObjectBox.get().boxFor(Phone.class);
         setContentView(R.layout.activity_main);
         toolBar();
         tabs();
@@ -58,13 +57,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void promptUser(int resource, final String posetiveText, String negativeText) {
-        // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(resource, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
-        // set dialog message
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(posetiveText,
@@ -83,19 +79,14 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
         alertDialog.show();
     }
-    public void promptUserAddUser() {
-        // get prompts.xml view
+    public void promptUserAddPhone(View view) {
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.prompt_new_number, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
-        // set dialog message
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
         alertDialogBuilder
@@ -105,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog,int id) {
                                 Phone phone = new Phone();
                                 phone.setPhone(userInput.getText().toString());
-                                phoneBox.put(phone);
-                                PlaceholderFragment.phoneListRecyclerViewAdapter.addPhoneList(phone);
+                                try {
+                                    Snackbar snackbar = Snackbar.make(view, "successfully added.", 2000);
+                                    snackbar.show();
+                                    PlaceholderFragment.phoneListRecyclerViewAdapter.addPhoneList(phone);
+                                } catch (Exception e) {
+                                    Snackbar snackbar = Snackbar.make(view, "Phone number already added.", 2000);
+                                    snackbar.show();
+                                }
                             }
                         })
                 .setNegativeButton("cancel",
@@ -115,9 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
         alertDialog.show();
     }
 
@@ -126,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                promptUserAddUser();
+                promptUserAddPhone(view);
             }
         });
     }

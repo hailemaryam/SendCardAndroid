@@ -17,9 +17,7 @@
         {
           "id": "2:5646332341191929973",
           "name": "phone",
-          "indexId": "1:5858024186110292627",
-          "type": 9,
-          "flags": 2080
+          "type": 9
         }
       ],
       "relations": []
@@ -55,7 +53,7 @@
     }
   ],
   "lastEntityId": "2:2378162136402365160",
-  "lastIndexId": "1:5858024186110292627",
+  "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
