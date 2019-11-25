@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.sendcard.DTO.Phone;
 import com.example.sendcard.Database.ObjectBox;
 import com.example.sendcard.R;
+import com.example.sendcard.prompts.DeletePhone;
 import com.example.sendcard.ui.main.PhoneCustomViewHolder;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -51,10 +52,7 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneBox.remove(phone);
-                phoneList.remove(phone);
-                notifyDataSetChanged();
-                phoneViewVisibility();
+                DeletePhone.promptUser(phone, context);
             }
         });
     }
@@ -71,6 +69,12 @@ public class PhoneListRecyclerViewAdapter extends RecyclerView.Adapter<PhoneCust
     public void addPhoneList(Phone phone){
         phoneBox.put(phone);
         phoneList.add(phone);
+        notifyDataSetChanged();
+        phoneViewVisibility();
+    }
+    public void deletePhone(Phone phone){
+        phoneBox.remove(phone);
+        phoneList.remove(phone);
         notifyDataSetChanged();
         phoneViewVisibility();
     }
